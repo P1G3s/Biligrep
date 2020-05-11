@@ -10,8 +10,6 @@
 #define B_UPKEY 'k'
 #define B_DOWNKEY 'j'
 #define B_CONFIRM 10
-#define B_MAXLINES 25
-#define B_MAXCOLUMNS 120
 
 
 WINDOW* initUI();

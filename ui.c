@@ -12,17 +12,19 @@
 #define B_DOWNKEY 'j'
 #define B_CONFIRM 10
 #define B_MAXLINES 25
-#define B_MAXCOLUMNS 120
+#define B_MAXCOLUMNS 80
 
 WINDOW* initUI(){
 	setlocale(LC_ALL,"");
-	keypad(stdscr,TRUE);
+	def_shell_mode();
 	initscr();
 	noecho();
 	cbreak();
-	//WINDOW* win = newwin(B_MAXLINES, B_MAXCOLUMNS, 1, 1);
+	clear();
+	WINDOW* win = newwin(B_MAXLINES, B_MAXCOLUMNS, 1, 1);
+	keypad(win,TRUE);
 	refresh();
-	return stdscr;
+	return win;
 }
 
 // Show playlist, and return [type, off_y]
@@ -45,7 +47,7 @@ char* showPlaylist(WINDOW* win,playlist* list){
 	wmove(win, start_y, start_x);
 	wrefresh(win);	
 	for(;!done;){
-		input = (char)getch();
+		input = (char)wgetch(win);
 		switch(input){
 			case B_DOWNKEY:
 				off_y = off_y==list->size-1?off_y:off_y+1; 
@@ -82,7 +84,7 @@ char* showPlaylist(WINDOW* win,playlist* list){
 		}
 		if(ret[0]!=0) {ret[1]=off_y;break;}
 	}
-	wrefresh(win);
 	wclear(win);
+	wrefresh(win);
 	return ret;
 }

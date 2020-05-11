@@ -6,12 +6,16 @@
 #include <string.h>
 #include <netdb.h>
 #include <arpa/inet.h>
+#include <signal.h>
 
 #include "extractor.h"
 #include "config.h"
 #include "player.h"
 #include "ui.h"
 #include <mpv/client.h>
+
+// This handler handles SIGWINCH which interrupt system call when resizing
+void handler(int num){}
 
 void freePlaylist(playlist* list){
 	BVideo* bvideos = list->bvideos;
@@ -30,8 +34,8 @@ int main(int argc, char *argv[]){
 	int curPage = 0;
 	char* ret;
 
+	signal(SIGWINCH, handler);
 	playlist* list = extractLatestDynamic();
-
 	WINDOW* win = initUI();
 	do{
 		ret = showPlaylist(win,list);
@@ -64,11 +68,13 @@ int main(int argc, char *argv[]){
 		}
 		if (ret[0]==B_CONFIRM) break;
 	}while(1);
+	wrefresh(win);
 	endwin();
+	reset_shell_mode();
 
 	//index = 1;
 	BVideo* bvideos = list->bvideos;
-	printf(" Wonderful Choice! Greping %s! This might takes few sec...\n", bvideos[index].bid);
+	printf("Wonderful Choice! Greping %s! This might takes few sec...\n", bvideos[index].bid);
 
 	extractID(&bvideos[index]);
 	char* playUrl = extractPlayUrl(&bvideos[index]);

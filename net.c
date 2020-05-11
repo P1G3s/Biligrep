@@ -67,7 +67,7 @@ void *progressMonitor(void* ptr){
 		fflush(NULL);
 		*writelenPerSec = 0;
 		if ((*currentLength) == (*contentLength)) break;		
-		printf("%s",back);
+		printf("\r");
 	}
 	free(bar);
 	free(back);
@@ -90,7 +90,7 @@ char* sendReq(int ClientSocketfd, const char* request, const char* file){
 	if (write(ClientSocketfd, request, strlen(request))==-1) errExit("Failed to shoot the request");
 	/* read/output */
 	contentLength = grepContentLength(ClientSocketfd);
-	printf("[Content-Length: %ld]\n",contentLength);
+	//printf("[Content-Length: %ld]\n",contentLength);
 	//printf("\n----------Content Of The Response----------\n");
 	if (file==NULL){
 		// ContentLength unknown (no response will be returned, contents go to .buffer file)
@@ -137,7 +137,7 @@ char* sendReq(int ClientSocketfd, const char* request, const char* file){
 	bprint("[Closing  Connection]");
 	if(close(ClientSocketfd)==-1) errExit("Close Connection");
 	OJBK();
-	printf("\n\n");
+	printf("\n");
 	return response;
 }
 
@@ -156,7 +156,7 @@ void sendDReq(int ClientSocketfd, const char* request, const char* file){
 	printf("[Content-Length: %ld]\n",contentLength);
 	responseLength = contentLength<MAXLEN?contentLength:MAXLEN;
 	response = (char*) calloc(responseLength+1, sizeof(char));
-	int fd = open(file, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	int fd = open("Video1.flv", O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	struct args_struct args;
 	args.readlen = &readlen;
 	args.currentLength = &currentLength;
@@ -165,12 +165,12 @@ void sendDReq(int ClientSocketfd, const char* request, const char* file){
 	pthread_t pgbar;
 	pthread_create( &pgbar, NULL, &progressMonitor, &args);
 	printf("[Total File Size: %ld MB]\n",(contentLength/1024)/1024);
-	printf("[Downloading To \"%s\"]\n", file);
+	printf("[Downloading - \"%s\"]\n", file);
 	do{
 		readlen = read(ClientSocketfd, response, responseLength);
 		currentLength += readlen;
 		writelenPerSec += readlen;
-		if (write(fd, response, readlen)==-1) errExit("Something wrong occurs during downloading, Try agin");
+		if (write(fd, response, readlen)==-1) errExit("Error occurs during downloading, Try agin");
 	}while((currentLength<contentLength)&&(readlen!=0));
 	pthread_join(pgbar, NULL);
 	close(fd);
@@ -178,5 +178,5 @@ void sendDReq(int ClientSocketfd, const char* request, const char* file){
 	if(close(ClientSocketfd)==-1) errExit("Close Connection");
 	OJBK();
 	free(response);
-	printf("\n\n");
+	printf("\n");
 }

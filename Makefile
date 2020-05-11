@@ -27,4 +27,4 @@ biligrep.o: biligrep.c biligrep.c
 .PHONY = clean
 
 clean:
-	rm *.o biligrep
+	rm *.o biligrep *.flv
