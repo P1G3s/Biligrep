@@ -5,3 +5,6 @@
 .gdb_history
 .desc
 header.h
+*.o
+*.flv
+biligrep
