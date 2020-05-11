@@ -29,7 +29,7 @@ int httpConnect(const char* hostname){
 	struct hostent *host;
 	int ClientSocketfd;
 
-	//bprint("[Connecting To Host]");
+	bprint("[Connecting To Host]");
 	/* create socket for client */
 	ClientSocketfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (ClientSocketfd==-1) errExit("Failed to create socket");
@@ -41,7 +41,7 @@ int httpConnect(const char* hostname){
 	saddr.sin_family = AF_INET;
 	memcpy(&saddr.sin_addr.s_addr, host->h_addr_list[0], host->h_length);
 	if (connect(ClientSocketfd, (struct sockaddr *)&saddr, sizeof(saddr)) == -1) errExit("Failed to connect");
-	//OJBK();
+	OJBK();
 	return ClientSocketfd;
 }
 

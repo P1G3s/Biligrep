@@ -4,9 +4,8 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 #include <mpv/client.h>
-#define HEADER "User-Agent: MPlayer, Referer: https://www.bilibili.com/, Cookie: _uuid=30569C8D-558F-AAE4-0E66-712DF7DB4FD148666infoc; buvid3=6FFF2E88-6570-45D1-A1BF-149532284470155825infoc; LIVE_BUVID=AUTO9115853601587540; sid=5un8vz46; CURRENT_FNVAL=16; rpdid=|(J|~u~Jlm)|0J'ul)lJYluJk; flash_player_gray=false; html5_player_gray=false; CURRENT_QUALITY=64; PVID=1; DedeUserID=14066157; DedeUserID__ckMd5=6dc1b1f4b6b08f71; SESSDATA=173d81eb%2C1603863194%2C493da*51; bili_jct=6248c199d9f67dc646af20d8cc443972; bp_t_offset_14066157=384427185340436625"
+
 
 void check_error(int status)
 {
@@ -35,9 +34,8 @@ int mpvPlay(char* url)
     check_error(mpv_initialize(ctx));
 
     // Play this file.
-	//url = "https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/48/28/188382848/188382848-1-80.flv?e=ig8euxZM2rNcNbhjhbUVhoMz7bNBhwdEto8g5X10ugNcXBlqNxHxNEVE5XREto8KqJZHUa6m5J0SqE85tZvEuENvNo8g2ENvNo8i8o859r1qXg8xNEVE5XREto8GuFGv2U7SuxI72X6fTr859r1qXg8gNEVE5XREto8z5JZC2X2gkX5L5F1eTX1jkXlsTXHeux_f2o859IB_&uipk=5&nbs=1&deadline=1588930348&gen=playurl&os=cosbv&oi=3071736214&trid=3d50f9adf18645209227eee1777113b0u&platform=pc&upsig=86b048f44b96a809e8756f31956ab5fd&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&mid=14066157&logo=80000000";
     const char *cmd[] = {"loadfile", url, NULL};
-	check_error(mpv_set_option_string(ctx, "http-header-fields", HEADER));
+	//check_error(mpv_set_option_string(ctx, "http-header-fields", HEADER));
 	check_error(mpv_set_option_string(ctx, "ytdl", "yes"));
     check_error(mpv_command(ctx, cmd));
 

@@ -145,7 +145,6 @@ char* extractPlayUrl(BVideo* bvideo){
 		if(*tPlayUrl == '\0') break;
 	}
 	OJBK();
-	printf("%s\n",parsedUrl);
 	free(response);
 	return parsedUrl;
 }

@@ -12,18 +12,17 @@
 #define B_DOWNKEY 'j'
 #define B_CONFIRM 10
 #define B_MAXLINES 25
-#define B_MAXCOLUMNS 80
+#define B_MAXCOLUMNS 100
 
 WINDOW* initUI(){
 	setlocale(LC_ALL,"");
-	def_shell_mode();
 	initscr();
 	noecho();
 	cbreak();
 	clear();
+	refresh();
 	WINDOW* win = newwin(B_MAXLINES, B_MAXCOLUMNS, 1, 1);
 	keypad(win,TRUE);
-	refresh();
 	return win;
 }
 
@@ -40,12 +39,14 @@ char* showPlaylist(WINDOW* win,playlist* list){
 	ret[0]=0;ret[1]=0;
 	BVideo* bvideos = list->bvideos;
 	//WINDOW* win = newwin(B_MAXLINES, B_MAXCOLUMNS, 1, 1);
+	wclear(win);
 	wborder(win, '|', '|', '-', '-', '+', '+', '+', '+');
 	for(int i=0;i<list->size;i++){
 		mvwprintw(win, start_y+i, start_x, "%2d. %s", i+1, bvideos[i].title);
 	}
 	wmove(win, start_y, start_x);
-	wrefresh(win);	
+	wrefresh(win);
+	//wrefresh(win);	
 	for(;!done;){
 		input = (char)wgetch(win);
 		switch(input){

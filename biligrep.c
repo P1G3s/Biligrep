@@ -15,8 +15,8 @@
 #include <mpv/client.h>
 
 // This handler handles SIGWINCH which interrupt system call when resizing
-void handler(int num){}
-
+void winchHandler(int num){}
+void intHandler(int num){printf("\n\rExiting...\n");exit(0);}
 void freePlaylist(playlist* list){
 	BVideo* bvideos = list->bvideos;
 	for(int i=0;i<list->size;i++){
@@ -27,16 +27,18 @@ void freePlaylist(playlist* list){
 	free(list);
 }
 
-
 int main(int argc, char *argv[]){
 	int index;
 	int maxPage = 0;  // Max pages that have we got from the history dynamics
-	int curPage = 0;
+	int curPage = 0;  // Current page that we are in
 	char* ret;
 
-	signal(SIGWINCH, handler);
-	playlist* list = extractLatestDynamic();
+	signal(SIGWINCH, winchHandler);
+	signal(SIGINT, intHandler);
+
+	// TUI for dynamics
 	WINDOW* win = initUI();
+	playlist* list = extractLatestDynamic();
 	do{
 		ret = showPlaylist(win,list);
 		switch(ret[0]){
@@ -70,7 +72,6 @@ int main(int argc, char *argv[]){
 	}while(1);
 	wrefresh(win);
 	endwin();
-	reset_shell_mode();
 
 	//index = 1;
 	BVideo* bvideos = list->bvideos;
@@ -79,11 +80,10 @@ int main(int argc, char *argv[]){
 	extractID(&bvideos[index]);
 	char* playUrl = extractPlayUrl(&bvideos[index]);
 	//mpvPlay(playUrl);	
-
 	requestVideoStream(&bvideos[index],playUrl);
+
 	free(bvideos[index].cid);
 	free(bvideos[index].aid);
-	free(bvideos[index].title);
 	free(playUrl);
 	freePlaylist(list);
 	return 0;
