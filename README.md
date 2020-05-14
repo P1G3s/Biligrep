@@ -1,15 +1,17 @@
 # Biligrep
-A command-line-tool to help ONLY grep dynamics and Download videos from Bilibili (~~alpha~~ 'dont know if it works' version)
+A command-line-tool to help ONLY grep dynamics and Download videos from Bilibili (~~Alpha~~ 'Dont Know If It Works' version)
 
 ### What purpose this tool serves
 - Nerf Dopamine
 - To prevent time from being wasted because of the evil recommendation
-- Improve mental health by not showing soft porn thumbnail and click bait (partially, they could be in the title as well :( )
-- This tool is meant to show your own dynamics only (Searching may be implemented in the future or not), no fancy tricks
+- Improve mental health by not showing soft porn and click bait thumbnail(partially, they could be in the title as well :( )
+- This tool is meant to show your own dynamics only (Searching may be implemented in the future or not), it does no fancy tricks
 
 ### What it cant do
 - Choose video quality
-- MUCH MORE...
+- Only original video dynamics will be shown, due to my incompetence, it currently disards all shared dynamics, pictures, article, etc.
+- Indicate the format it downloads (it seems to downlaod .flv at the moment)
+- MUCH MORE... (My src code is pure garbage, makes you feel miserable only)
 
 ### Requirement
 - libncurses5-dev
