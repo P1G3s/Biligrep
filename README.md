@@ -7,6 +7,10 @@ A command-line-tool to help ONLY grep dynamics and Download videos from Bilibili
 - Improve mental health by not showing soft porn thumbnail and click bait (partially, they could be in the title as well :( )
 - This tool is meant to show your own dynamics only (Searching may be implemented in the future or not), no fancy tricks
 
+### What it cant do
+- Choose video quality
+- MUCH MORE...
+
 ### Requirement
 - libncurses5-dev
 - libmpv-dev
