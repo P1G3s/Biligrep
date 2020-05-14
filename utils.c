@@ -268,6 +268,7 @@ void pushDynamics(){
 	write(cardsfd, holder[0], strlen(holder[0]));
 	lseek(cardsfd, 0, SEEK_SET);
 	free(*holder);
+	extern char* historyOffset;
 
 	if (!historyOffset){
 		*key = "history_offset";

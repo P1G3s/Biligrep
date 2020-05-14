@@ -4,6 +4,8 @@
 
 #include "config.h"
 
+#define B_DOWNLOAD 'd'
+#define B_PLAYNOW 'p'
 #define B_NEXTPAGE 'l'
 #define B_LASTPAGE 'h'
 #define B_QUIT 'q'

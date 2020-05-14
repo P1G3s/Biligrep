@@ -9,6 +9,7 @@
 #ifndef DATA_H
 #define DATA_H
 char* historyOffset;
+
 struct BVideo{
 	char* bid;
 	char* aid;

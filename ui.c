@@ -3,8 +3,9 @@
 #include <stdlib.h>
 
 #include "config.h"
-//#define B_DOWNLOAD 'd'
-//#define B_PLAYNOW 'p'
+
+#define B_DOWNLOAD 'd'
+#define B_PLAYNOW 'p'
 #define B_NEXTPAGE 'l'
 #define B_LASTPAGE 'h'
 #define B_QUIT 'q'
@@ -60,14 +61,12 @@ char* showPlaylist(WINDOW* win,playlist* list){
 				wmove(win, start_y+off_y, start_x);
 				wrefresh(win);
 				break;
-				/*
 			case B_DOWNLOAD:
-				ret = B_DOWNLOAD;
+				ret[0] = B_DOWNLOAD;
 				break;
 			case B_PLAYNOW:
-				ret = B_PLAYNOW;
+				ret[0] = B_PLAYNOW;
 				break;
-				*/
 			case B_CONFIRM:
 				ret[0] = B_CONFIRM;
 				break;

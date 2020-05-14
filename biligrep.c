@@ -68,7 +68,7 @@ int main(int argc, char *argv[]){
 				index = ret[1];	
 				break;
 		}
-		if (ret[0]==B_CONFIRM) break;
+		if ((ret[0]==B_CONFIRM)||(ret[0]==B_PLAYNOW)||(ret[0]==B_DOWNLOAD)) break;
 	}while(1);
 	wrefresh(win);
 	endwin();
@@ -77,14 +77,20 @@ int main(int argc, char *argv[]){
 	BVideo* bvideos = list->bvideos;
 	printf("Wonderful Choice! Greping %s! This might takes few sec...\n", bvideos[index].bid);
 
-	extractID(&bvideos[index]);
-	char* playUrl = extractPlayUrl(&bvideos[index]);
-	//mpvPlay(playUrl);	
-	requestVideoStream(&bvideos[index],playUrl);
+	if ((ret[0]==B_PLAYNOW)||ret[0]==B_CONFIRM){
+		mpvPlay(bvideos[index]);	
+	}
 
-	free(bvideos[index].cid);
-	free(bvideos[index].aid);
-	free(playUrl);
+	if (ret[0]==B_DOWNLOAD){
+		extractID(&bvideos[index]);
+		char* playUrl = extractPlayUrl(&bvideos[index]);
+		requestVideoStream(&bvideos[index],playUrl);
+
+		free(bvideos[index].cid);
+		free(bvideos[index].aid);
+		free(playUrl);
+	}
+
 	freePlaylist(list);
 	return 0;
 }

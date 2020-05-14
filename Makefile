@@ -1,4 +1,4 @@
-CFLAGS = -pthread
+CFLAGS = -pthread -fno-common
 LIB = -lncursesw `pkg-config --libs --cflags mpv`
 
 CC = gcc
@@ -27,4 +27,4 @@ biligrep.o: biligrep.c biligrep.c
 .PHONY = clean
 
 clean:
-	rm *.o biligrep *.flv
+	rm *.o biligrep

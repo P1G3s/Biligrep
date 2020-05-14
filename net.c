@@ -137,7 +137,6 @@ char* sendReq(int ClientSocketfd, const char* request, const char* file){
 	bprint("[Closing  Connection]");
 	if(close(ClientSocketfd)==-1) errExit("Close Connection");
 	OJBK();
-	printf("\n");
 	return response;
 }
 
@@ -156,7 +155,7 @@ void sendDReq(int ClientSocketfd, const char* request, const char* file){
 	printf("[Content-Length: %ld]\n",contentLength);
 	responseLength = contentLength<MAXLEN?contentLength:MAXLEN;
 	response = (char*) calloc(responseLength+1, sizeof(char));
-	int fd = open("Video1.flv", O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	int fd = open("./Videos/Video1.flv", O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	struct args_struct args;
 	args.readlen = &readlen;
 	args.currentLength = &currentLength;

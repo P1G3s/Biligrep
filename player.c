@@ -1,10 +1,13 @@
-// Build with: gcc -o simple simple.c `pkg-config --libs --cflags mpv`
-// This is the simple version of a mpv API example
-
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <mpv/client.h>
+#include <locale.h>
+#include <string.h>
+
+#include "config.h"
+
+#define HEADER "User-Agent: MPlayer, Referer: https://www.bilibili.com/"
 
 
 void check_error(int status)
@@ -15,39 +18,36 @@ void check_error(int status)
     }
 }
 
-int mpvPlay(char* url)
+int mpvPlay(BVideo bvideo)
 {
+	setlocale(LC_NUMERIC, "C");
     mpv_handle *ctx = mpv_create();
     if (!ctx) {
         printf("failed creating context\n");
         return 1;
     }
 
-    // Enable default key bindings, so the user can actually interact with
-    // the player (and e.g. close the window).
     check_error(mpv_set_option_string(ctx, "input-default-bindings", "yes"));
     mpv_set_option_string(ctx, "input-vo-keyboard", "yes");
     int val = 1;
     check_error(mpv_set_option(ctx, "osc", MPV_FORMAT_FLAG, &val));
-
-    // Done setting up options.
     check_error(mpv_initialize(ctx));
 
-    // Play this file.
+	char* format = "https://www.bilibili.com/video/%s";
+	char* url = calloc(strlen(format)+15,sizeof(char));
+	sprintf(url,format,bvideo.bid);
     const char *cmd[] = {"loadfile", url, NULL};
-	//check_error(mpv_set_option_string(ctx, "http-header-fields", HEADER));
+	printf("You are now watching '%s'\n",bvideo.title);
 	check_error(mpv_set_option_string(ctx, "ytdl", "yes"));
     check_error(mpv_command(ctx, cmd));
 
-    // Let it play, and wait until the user quits.
-	//char* time = malloc(100);
+	// Wait for the first idle
+    mpv_event *event = mpv_wait_event(ctx, 10000);
     while (1) {
-        mpv_event *event = mpv_wait_event(ctx, 10000);
-        printf("event: %s\n", mpv_event_name(event->event_id));
-        if (event->event_id == MPV_EVENT_SHUTDOWN)
+        event = mpv_wait_event(ctx, 10000);
+        if ((event->event_id == MPV_EVENT_SHUTDOWN)||(event->event_id == MPV_EVENT_IDLE))
             break;
     }
-
     mpv_terminate_destroy(ctx);
     return 0;
 }

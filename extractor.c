@@ -174,6 +174,7 @@ playlist* extractLatestDynamic(){
 playlist* extractHistory(int page){
 	char* format = "api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_history?uid=%s&offset_dynamic_id=%s&type=268435455";
 	char* url = (char*) calloc(strlen(format)+50, sizeof(char));
+	extern char* historyOffset;
 	sprintf(url, format, UID, historyOffset);
 	//sprintf(url, format, UID); -> free() invalid next size!!!!
 	char* hostName = spawnHostName(url);

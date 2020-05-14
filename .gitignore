@@ -4,7 +4,9 @@
 .buffer
 .gdb_history
 .desc
+apitest
 header.h
 *.o
 *.flv
 biligrep
+./Videos/*
