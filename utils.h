@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
-
+#ifndef UTILS_H
+#define UTILS_H
 #include "config.h"
 
 // Grep property to the holder with key from JSON format object
@@ -18,3 +15,4 @@ playlist* getPlaylist(int page);
 
 // 'Push' Dynamics info to .dcache
 void pushDynamics();
+#endif

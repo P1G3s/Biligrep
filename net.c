@@ -14,15 +14,9 @@
 
 #include "config.h"
 #include "utils.h"
+#include "net.h"
 
 #define MAXLEN 8192
-
-struct args_struct{
-	ssize_t* readlen;
-	ssize_t* contentLength;
-	ssize_t* currentLength;
-	ssize_t* writelenPerSec;
-};
 
 int httpConnect(const char* hostname){
 	struct sockaddr_in saddr;
@@ -87,6 +81,7 @@ char* sendReq(int ClientSocketfd, const char* request, const char* file){
 	ssize_t currentLength = 1;
 	char* response;
 	/* transfer request */
+	printf(request);
 	if (write(ClientSocketfd, request, strlen(request))==-1) errExit("Failed to shoot the request");
 	/* read/output */
 	contentLength = grepContentLength(ClientSocketfd);

@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
+#include "utils.h"
 #include "config.h"
 
 void grepJSONProp(int fd, int klen, const char** key, char** holder){

@@ -4,6 +4,7 @@
 
 #include "config.h"
 #include "header.h"
+#include "spawner.h"
 
 #define PROTOCOL "HTTP/1.1"
 #define REQTYPE "GET"

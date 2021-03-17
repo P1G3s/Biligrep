@@ -1,3 +1,6 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
 #define UID "14066157"
 #define PORT 80
 
@@ -5,11 +8,6 @@
 #define OJBK() printf("\x1B[32mOK\x1B[0m\n");
 #define bprint(s) {printf("%-60s",s);fflush(NULL);}
 #define Failed() {printf("\x1B[31mFailed\n\x1B[0m");exit(1);}
-
-#ifndef DATA_H
-#define DATA_H
-char* historyOffset;
-
 struct BVideo{
 	char* bid;
 	char* aid;
@@ -24,4 +22,5 @@ struct playlist{
 	int size;
 };
 typedef struct playlist playlist;
+
 #endif

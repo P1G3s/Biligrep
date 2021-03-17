@@ -4,7 +4,9 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <unistd.h>
 
+#include "extractor.h"
 #include "config.h"
 #include "spawner.h"
 #include "net.h"

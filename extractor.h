@@ -1,15 +1,7 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <sys/types.h>
+#ifndef EXTRACTOR_H
+#define EXTRACTOR_H
 
 #include "config.h"
-#include "spawner.h"
-#include "net.h"
-#include "utils.h"
-
 
 void extractID(BVideo* bvideo);
 
@@ -21,3 +13,4 @@ playlist* extractLatestDynamic();
 
 playlist* extractHistory(int page);
 
+#endif

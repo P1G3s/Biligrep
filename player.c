@@ -6,6 +6,7 @@
 #include <string.h>
 
 #include "config.h"
+#include "player.h"
 
 #define HEADER "User-Agent: MPlayer, Referer: https://www.bilibili.com/"
 
