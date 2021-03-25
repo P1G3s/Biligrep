@@ -1,13 +1,13 @@
 # Biligrep 
-A command-line-tool to help ONLY grep dynamics and Download videos from Bilibili
+A command-line-tool that helps grep dynamics and ~~Download~~ play videos from Bilibili
 
 ### What purpose this tool serves
 - Nerf Dopamine
 
-### What it cant do
+### What it can not do
 - Choose video quality
-- Only original video dynamics will be shown, it currently disards all shared dynamics, pictures, article, etc.
-- Indicate the format it downloads (it seems to downlaod .flv at the moment)
+- Only video dynamics will be fetched, it currently disards all shared dynamics, pictures, articles, videos, etc.
+- ~~Indicate the format it downloads (it seems to downlaod .flv at the moment)~~
 
 ### Requirement
 - libncurses5-dev
@@ -22,12 +22,11 @@ A command-line-tool to help ONLY grep dynamics and Download videos from Bilibili
   make
   ./biligrep
   ```
-- Then you should be good to go
 
-### Handling
+### Handling (vim-like)
+- Press 'Enter' to play the video on mpv
 - Press 'j' to move the cursor to next dynamic(video)
 - Press 'k' to move the cursor to last dynamic(video)
 - Press 'l' to browse your history dynamics
 - Press 'h' to browse your newer dynamics 
-- Press 'd' to download the video (no longer available, play it on mpv instead)
-- Press 'Enter' to play the video online in mpv
+- ~~Press 'd' to download the video~~ (no longer available, play it on mpv instead)
