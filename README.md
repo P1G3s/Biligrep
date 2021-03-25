@@ -1,4 +1,4 @@
-# Biligrep
+# Biligrep 
 A command-line-tool to help ONLY grep dynamics and Download videos from Bilibili
 
 ### What purpose this tool serves
@@ -29,5 +29,5 @@ A command-line-tool to help ONLY grep dynamics and Download videos from Bilibili
 - Press 'k' to move the cursor to last dynamic(video)
 - Press 'l' to browse your history dynamics
 - Press 'h' to browse your newer dynamics 
-- Press 'd' to download the video
-- Press '<CR>' to play the video online in mpv-
+- Press 'd' to download the video (no longer available, play it on mpv instead)
+- Press 'Enter' to play the video online in mpv
