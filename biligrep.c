@@ -15,8 +15,8 @@
 #include "utils.h"
 #include <mpv/client.h>
 
-char* historyOffset;
 // This handler handles SIGWINCH which interrupt system call when resizing
+char* historyOffset;
 void winchHandler(int num){}
 void intHandler(int num){printf("\n\rExiting...\n");exit(0);}
 void freePlaylist(playlist* list){

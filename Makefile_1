@@ -1,0 +1,14 @@
+CFLAGS = -pthread -fno-common
+LIB = -lncursesw `pkg-config --libs --cflags mpv`
+
+CC = gcc
+
+OBJ = spawner.c net.c extractor.c utils.c player.c ui.c biligrep.c
+
+all: $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o biligrep 
+
+.PHONY = clean
+
+clean:
+	rm biligrep

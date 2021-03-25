@@ -36,6 +36,8 @@ int httpConnect(const char* hostname){
 	memcpy(&saddr.sin_addr.s_addr, host->h_addr_list[0], host->h_length);
 	if (connect(ClientSocketfd, (struct sockaddr *)&saddr, sizeof(saddr)) == -1) errExit("Failed to connect");
 	OJBK();
+	printf(hostname);
+	printf("\n");
 	return ClientSocketfd;
 }
 
